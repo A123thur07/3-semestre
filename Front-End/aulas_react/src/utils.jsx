@@ -1,0 +1,1 @@
+export const ederecoServidor = 'http://10.130.42.68:3001'
