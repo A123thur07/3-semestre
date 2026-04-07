@@ -23,7 +23,10 @@ app.get('/', async(req, res) =>{
 })
 
 //Utilizando rotas
-app.use(rotasUsuarios, rotasCategorias, rotasSubcategorias, rotasTransacoes);
+app.use(rotasUsuarios);
+app.use(rotasCategorias);
+app.use(rotasSubcategorias);
+app.use(rotasTransacoes);
 // app.use(rotasProdutos);
 
 const porta = 3000;

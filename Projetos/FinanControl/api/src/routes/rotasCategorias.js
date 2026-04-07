@@ -149,4 +149,7 @@ router.delete('/categorias/:id_categoria', async(req, res) =>{
 })
 
 
+
+
+
 export default router

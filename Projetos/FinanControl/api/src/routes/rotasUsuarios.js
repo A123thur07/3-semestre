@@ -8,13 +8,14 @@ const router = Router();
 router.get('/usuarios', async(req, res) =>{
     try{
         //cria uma variavel para enviar o comando sql
-        const query = `SELECT * FROM usuarios ORDER BY id_usuario`
+        const comando = `SELECT * FROM usuarios ORDER BY id_usuario`
 
         //cria uma variavel para receber o retorno do sql
-        const usuarios = await BD.query(query);
+        const usuarios = await BD.query(comando);
 
         //retorno para a pagina, o json com os dados 
         //buscados do sql
+        console.log(usuarios.rows);
        return res.status(200).json(usuarios.rows);//200 ok
     }catch(error){
         console.error('Erro ao listar usuários', error.message);

@@ -26,7 +26,7 @@ const documentacao = {
                     200: {
                         description: "Dados obtidos com sucesso!",
                         content: {
-                            "apllication/json": {
+                            "application/json": {
                                 schema: {
                                     type: "array",
                                     items: { $ref: '#/components/schemas/Listar_Usuarios' }
@@ -154,7 +154,7 @@ const documentacao = {
                     200: {
                         description: "Dados obtidos com sucesso!",
                         content: {
-                            "apllication/json": {
+                            "application/json": {
                                 schema: {
                                     type: "array",
                                     items: { $ref: '#/components/schemas/Listar_Categorias' }
@@ -274,7 +274,6 @@ const documentacao = {
 
                 }
             },
-
         },
 
         "/subcategorias": {
@@ -285,7 +284,7 @@ const documentacao = {
                     200: {
                         description: "Dados obtidos com sucesso!",
                         content: {
-                            "apllication/json": {
+                            "application/json": {
                                 schema: {
                                     type: "array",
                                     items: { $ref: '#/components/schemas/Listar_Subcategorias' }
@@ -402,7 +401,6 @@ const documentacao = {
 
                 }
             },
-
         },
 
         "/transacoes": {
@@ -413,7 +411,7 @@ const documentacao = {
                     200: {
                         description: "Dados obtidos com sucesso!",
                         content: {
-                            "apllication/json": {
+                            "application/json": {
                                 schema: {
                                     type: "array",
                                     items: { $ref: '#/components/schemas/Listar_Transacao' }
@@ -534,8 +532,123 @@ const documentacao = {
 
                 }
             },
-
         },
+        "/transacoes/tipo/{tipo}": {
+            get: {
+                tags: ["Transações"],
+                summary: "Listar transações por tipo",
+                description: "Retorna uma lista de transações filtradas pelo tipo",
+                parameters: [
+                    {
+                        name: "tipo",
+                        in: "path",
+                        required: true,
+                        description: "Tipo da transação (E para entrada, S para saída)",
+                        schema: {
+                            type: "string",
+                            enum: ["E", "S"],
+                            example: "E"
+                        }
+                    }
+                ],
+                responses: {
+                    200: {
+                        description: "Lista de transações por tipo",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "array",
+                                    items: { $ref: "#/components/schemas/Listar_Transacao" }
+                                }
+                            }
+                        }
+                    },
+                    404: {
+                        description: "Nenhuma transação encontrada para o tipo especificado"
+                    },
+                    500: {
+                        description: "Erro interno no servidor"
+                    }
+                }
+            }
+        },
+        "/transacoes/categoria/{id_categoria}": {
+            get: {
+                tags: ["Transações"],
+                summary: "Listar transações por categoria",
+                description: "Retorna uma lista de transações filtradas pela categoria",
+                parameters: [
+                    {
+                        name: "id_categoria",
+                        in: "path",
+                        required: true,
+                        description: "ID da categoria para filtrar as transações",
+                        schema: {
+                            type: "number",
+                            example: 1
+                        }
+                    }
+                ],
+                responses: {
+                    200: {
+                        description: "Lista de transações por categoria",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "array",
+                                    items: { $ref: "#/components/schemas/Listar_Transacao" }
+                                }
+                            }
+                        }
+                    },
+                    404: {
+                        description: "Nenhuma transação encontrada para o tipo especificado"
+                    },
+                    500: {
+                        description: "Erro interno no servidor"
+                    }
+                }
+            }
+        },
+        "/transacoes/subcategoria/{id_subcategoria}": {
+            get: {
+                tags: ["Transações"],
+                summary: "Listar transações por subcategoria",
+                description: "Retorna uma lista de transações filtradas pela subcategoria",
+                parameters: [
+                    {
+                        name: "id_subcategoria",
+                        in: "path",
+                        required: true,
+                        description: "ID da subcategoria para filtrar as transações",
+                        schema: {
+                            type: "number",
+                            example: 1
+                        }
+                    }
+                ],
+                responses: {
+                    200: {
+                        description: "Lista de transações por subcategoria",
+                        content: {
+                            "application/json": {
+                                schema: {
+                                    type: "array",
+                                    items: { $ref: "#/components/schemas/Listar_Transacao" }
+                                }
+                            }
+                        }
+                    },
+                    404: {
+                        description: "Nenhuma transação encontrada para o tipo especificado"
+                    },
+                    500: {
+                        description: "Erro interno no servidor"
+                    }
+                }
+            }
+        },
+
 
         "/login": {
             post: {
@@ -715,7 +828,7 @@ const documentacao = {
                     senha: { type: "string", example: "Senha123" }
                 }
             },
-            Reposta_Login: {
+            Resposta_Login: {
                 type: 'object',
                 properties: {
                     message: { type: 'string', example: 'Login realizado com sucesso' },
